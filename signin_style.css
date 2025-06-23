@@ -1,0 +1,74 @@
+/* signin_style.css */
+
+/* 画面全体の背景は style.css のまま流用 */
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    font-family: 'Inter', 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+    color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* ガラス風カード */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 360px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  /* 見出し */
+  .login-container h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  /* ラベル */
+  .login-container .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  
+  /* 入力欄 */
+  .login-container .form-group input[type="text"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+  }
+  
+  /* プライマリボタン */
+  .btn-primary {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: rgb(18, 133, 76);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+  }
+  .btn-primary:hover {
+    background-color: rgb(18, 133, 76);
+  }
+  

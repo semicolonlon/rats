@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>待機画面</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 共通スタイル -->
+  <link href="style.css" rel="stylesheet" />
+  <!-- 待機画面専用スタイル -->
+  <link href="waiting.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="glass-card waiting-container">
+    <h1>参加者を待っています…</h1>
+    <div class="count" id="player-count">0 / 4</div>
+    <div class="message">
+      あと <span id="remain">4</span> 人でゲーム開始！
+    </div>
+    <ul id="player-list" class="player-list"></ul>
+  </div>
+
+  <script src="waiting.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  font-family: 'Inter', 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+  color: #f0f0f0;
+  touch-action: none;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.taskBox {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 1rem;
+  padding-bottom: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 100px;
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out, padding 0.6s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.taskBox.expand {
+  max-height: 80vh;
+  display: block;
+}
+
+.taskBox:not(.expand) .taskWrapper:not(:first-child) {
+  display: none;
+}
+
+.task {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0.2em 0;
+}
+
+.limitTime {
+  position: absolute;
+  font-size: 0.8rem;
+  color: #aaa;
+  margin: 0.2em 0;
+  right: 0;
+  padding: 10px;
+}
+
+.detail-button .material-symbols-outlined {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.chatBox {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 20px;
+  background: #669bbc;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.chatBox .material-symbols-outlined {
+  font-size: 32px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.chatBox.expand {
+  width: 90%;
+  max-width: 600px;
+  height: 240px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 16px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.chatBox.expand .material-symbols-outlined {
+  display: none;
+}
+
+.chatBox .chats {
+  display: none;
+}
+
+.chatBox.expand .chats {
+  display: block;
+}
+
+.chat {
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 0.8rem;
+  margin-bottom: 0.6rem;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+}
+
+.messenger {
+  text-align: right;
+  font-size: 0.7rem;
+  padding-bottom: 0.5rem;
+  color: #ccc;
+}
+
+.messaging-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+textarea {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.6rem;
+  resize: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.send-button {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.chatBox.expand  .send-button .material-symbols-outlined {
+  display: contents;
+  font-size: 20px;
+  z-index:  100;
+  color: #ffffff;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.task-button {
+  background-color: tomato;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.task-button:hover {
+  background-color: orangered;
+}
+
+.task-button.completed {
+  background-color: #4CAF50;
+  cursor: default;
+}
+
+.task-button.completed:hover {
+  background-color: #45a049;
+}
+
+.task-detail{
+  display: flex;
+}
+
+#rect-canvas{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+}
+
+.cameraWrapper {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.cameraWrapper.expand {
+  display: block;
+}
+
+.cameraWrapper video,
+.cameraWrapper canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.camera-close {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cameraWrapper.expand .camera-close {
+  display: block;
+}
+
+.camera-close:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.permitWrapper{
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-height: 100px;
+  overflow: hidden;
+  transition: max-height 0.6s ease-in-out, padding 0.6s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.permit-button-yes{
+  background-color: tomato;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+  float: right;
+  margin-left: auto;
+}
+
+.permitWrapper .button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.permitWrapper.expand{
+  display: none;
+}
+
+.killingButton{
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  left: 30px;
+  background: rgba(240, 0, 0, 0.7);
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.killingButton-title{
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.killingButton:hover {
+  transform: scale(1.01);
+  background: rgba(255, 50, 50, 0.8);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.killingButton.nothing{
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  left: 30px;
+  background: rgba(240, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  border: none;
+  outline: none; 
+  cursor: not-allowed;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.killingButton-title.nothing{
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #999999;
+  margin: 0;
+}
+
+.voteBox {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  bottom: 30px;
+  right: 100px;
+  background: coral;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.vote-title {
+  position: absolute; 
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #ffffff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.voteBox .voteWrapper {
+  display: none;
+}
+
+.voteBox.expand {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  bottom: 30px;
+  max-width: 600px;
+  height: 240px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 16px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.voteBox.expand .vote-title {
+  display: none;
+}
+
+.voteBox.expand .voteWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  min-height: 48px;
+  padding: 0px 10px;
+  flex-shrink: 0;
+}
+
+.vote-button {
+  position: relative;
+  margin-left: auto;
+  background: rgba(255, 100, 100, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 100, 100, 0.5);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.vote-button:hover {
+  background: rgba(255, 100, 100, 0.3);
+}
+
+.vote-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cutinWrapper {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cutinWrapper.express {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.movieWrapper {
+  margin-top: 1rem;
+}
+
+.cutinImg {
+  width: 200px;
+  max-width: 80vw;
+  height: auto;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.exitButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.voteBox.expand::-webkit-scrollbar {
+  width: 6px;
+}
+
+.voteBox.expand::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.voteBox.expand::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.voteBox.expand::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.voteWrapper.voted-status {
+  background-color: rgba(33, 150, 243, 0.15) !important;
+  border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.voted-message {
+  color: #ffffff !important;
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.change-vote-hint {
+  color: #ccc !important;
+  font-size: 0.8rem;
+  margin: 4px 0 0 0;
+  opacity: 0.8;
+}
+
+.vote-divider hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 8px 0;
+}
+
+.no-candidates {
+  color: #ccc;
+  text-align: center;
+  font-style: italic;
+  padding: 20px;
+  margin: 0;
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Rats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <!--style-->
+  <link href="style.css" rel="stylesheet" />
+
+  <!--script-->
+  <script src="./jsQR.js" defer></script>
+  <script type="module" src="./geo.js" defer></script>
+   <script src="./messageControl.js" defer></script>
+  <script type="module" src="./script.js" defer></script>
+  <script src="./camera.js" defer></script>
+  <script src="./cutin.js" defer></script>
+</head>
+
+<body>
+  <!-- タスクバー -->
+  <div class="taskBox">
+    タスク
+
+    <div class="taskWrapper">
+      <p class="task">
+        仮置き
+      </p>
+      <div class="task-detail">
+        <button class="task-button">DONE</button>
+        <p class='limitTime'>残り時間 6:02</p>
+      </div>
+    </div>
+
+    <div class="taskWrapper">
+      <p class="task">
+        仮置き
+      </p>
+      <div class="task-detail">
+        <button class="task-button">DONE</button>
+        <p class='limitTime'>残り時間 6:02</p>
+      </div>
+    </div>
+
+    <div class="detail-button">
+      <span class="material-symbols-outlined">swipe_up</span>
+    </div>
+  </div>
+
+  <!-- マップ -->
+  <div id="map"></div>
+
+  <!-- チャットボックス -->
+  <div class="chatBox">
+    <span class="material-symbols-outlined">chat</span>
+    <div class="chats">
+      <div class="chat">
+        <div class="messaging-box">
+          <textarea></textarea>
+          <button class="send-button">
+            <span class="material-symbols-outlined">rocket_launch</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 投票ボックス -->
+  <div class="voteBox">
+    <h1 class="vote-title">投票</h1>
+    <div class="voteWrapper">
+      <p class="voter">
+        仮置き
+      </p>
+      <button class="vote-button">
+        こいつが怪しい
+      </button>
+    </div>
+  </div>
+
+  <!--カメラ-->
+  <div class="cameraWrapper">
+    <button class="camera-close">×</button>
+    <video id="video" autoplay muted playsinline></video>
+    <canvas id="camera-canvas"></canvas>
+  </div>
+
+  <!--位置情報の承認ボタン-->
+  <div class="permitWrapper">
+    位置情報の引き渡しに同意しますか？
+    <button class="permit-button-yes" id="permit">はい</button>
+  </div>
+
+  <!--殺人-->
+  <button class="killingButton">
+    <h1 class="killingButton-title">殺す</h1>
+  </button>
+
+  <div class="cutinWrapper" id="cutin">
+    <h1 class="cutinTitle" id="typeTarget">you died</h1>
+    <p class="cutinSubtitle">仮置き</p>
+    <div class="movieWrapper">
+      <img src="assets/rat.png" class="cutinImg" alt="cutin image">
+    </div>
+  <button class="exitButton">×</button>
+  </div>
+</body>
+
+</html>

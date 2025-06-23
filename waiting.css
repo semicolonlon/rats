@@ -1,0 +1,96 @@
+/* waiting.css */
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Inter', 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+  color: #f0f0f0;
+}
+
+.waiting-container {
+  width: 90%;
+  max-width: 360px;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* 前面カード共通 */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* 見出し */
+.waiting-container h1 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* カウント表示 */
+.count {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0 1rem;
+}
+
+/* サブメッセージ */
+.message {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 1.5rem;
+}
+
+/* 参加者リスト */
+.player-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.player-list li {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+}
+
+.player-list li:last-child {
+  border-bottom: none;
+}
+
+/* Firefox 用 */
+.player-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+/* WebKit（Chrome, Safari, Edge）用 */
+.player-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.player-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.player-list::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+
+.player-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255,255,255,0.6);
+}
